@@ -1,25 +1,25 @@
-const {Schema, model, SchemaType} = require("mongoose");
+const {Schema, model, SchemaTypes} = require("mongoose");
 const {isEmail} = require("validator")
 
 const UserSchema = new Schema({
     username:{
-        type:String,
+        type: String,
         unique: true,
         required:true,
         trim:true
     },
     email:{
-        type:String,
+        type: String,
         unique:true,
         required:true,
         validate:[isEmail,"invalid email"]
     },
     thoughts:[{
-        type: SchemaType.ObjectId,
+        type: SchemaTypes.ObjectId,
         ref: 'Thought'
     }],
     friends:[{
-        type:SchemaType.ObjectId,
+        type:SchemaTypes.ObjectId,
         ref: "User"
     }]
 },{
