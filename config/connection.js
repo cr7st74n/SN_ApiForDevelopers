@@ -1,8 +1,8 @@
-const mondoose = require("mongoose");
+const {connect,connection} = require("mongoose");
 
-mondoose.connect('mongodb://127.0.0.1:27017/AnyDatabase',{
+connect("mongodb://localhost/SolialNetwork",{
     useNewUrlParser: true,
     useUnifiedTopology: true,
-})
+});
 
-module.exports = mondoose;
+module.exports = connection;

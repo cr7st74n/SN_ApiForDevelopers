@@ -1,18 +1,37 @@
-const {Schema, Model} = require("mongoose");
+const {Schema, model, SchemaType} = require("mongoose");
+const {isEmail} = require("validator")
 
-const userSchema = new Schema({ //bluePrint
-    email:{
-        type: String,
-        required:true
-    },
-    password:{
+const UserSchema = new Schema({
+    username:{
         type:String,
-        required: true,
-        min:6
+        unique: true,
+        required:true,
+        trim:true
+    },
+    email:{
+        type:String,
+        unique:true,
+        required:true,
+        validate:[isEmail,"invalid email"]
+    },
+    thoughts:[{
+        type: SchemaType.ObjectId,
+        ref: 'Thought'
+    }],
+    friends:[{
+        type:SchemaType.ObjectId,
+        ref: "User"
+    }]
+},{
+    toJSON:{
+        virtuals:true
     }
 });
 
-const User = new Model("user",userSchema);
-//const User = new Model("user",userSchema);
+UserSchema.virtual("friendCount").get(function(){
+    return this.friends.length;
+})
+
+const User = model("User", UserSchema);
 
 module.exports = User;
