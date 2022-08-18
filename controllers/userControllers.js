@@ -10,7 +10,7 @@ module.exports ={
     //Get one user
     //**********************POPULATED */
     async getUserById(req, res){
-        const user = await User.findOne({_id:req.params.userid});
+        const user = await User.findOne({_id:req.params.userid}).populate("thoughts").populate("friends");
         res.send(user);
     },
     //new User
@@ -36,7 +36,7 @@ module.exports ={
         console.log('User Deleted');
     },
     //USER FRIEND LIST 
-    // adding a frind 
+    // adding a friend 
 
     async addFriend(req,res){
         const friendreq = await User.findOneAndUpdate(

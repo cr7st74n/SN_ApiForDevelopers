@@ -13,11 +13,11 @@ module.exports ={
         console.log('got by id');
     },
     async newThought(req,res){
-        const {thoughtText, userId} = req.body;
+        const {thoughtText,username, userId} = req.body;
 
         const user = await User.findOne({_id:userId});
         const thought = await Thought.create({
-            thoughtText
+            thoughtText,username
         });
 
         user.thoughts.push(thought._id);
@@ -43,7 +43,7 @@ module.exports ={
     async reactTh(req,res){
         const reactThought = await Thought.findOneAndUpdate(
             {_id:req.params.thId},
-            {$push: {reactions:req.body}},
+            {$push: {reactions:req.body.reactionId}},
             {new:true},
         )
         res.sent(reactThought);
