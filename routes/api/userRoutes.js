@@ -2,17 +2,26 @@ const router = require("express").Router();
 
 //Get methods from controllers
 const {
-    getAllUsers
+    getAllUsers,
+    getUserById,
+    newUser,
+    updateUser,
+    delUser,
+    addFriend,
+    delFriend
 } = require("../../controllers/userControllers");
-
 //  api/user
-router.route("/").get(getAllUsers);
-
+router.route("/").get(getAllUsers)
+.post(newUser);
 
 // api/use/:userid
+router.route("/:userid").get(getUserById)
+.put(updateUser)
+.delete(delUser);
 
-// router.route("/:userid").get("")
-// .put()
-// .delete();
+//routes to our Friend 
+router.route("/:userid/friends/:friendId")
+.post(addFriend)
+.delete(delFriend);
 
 module.exports = router;
