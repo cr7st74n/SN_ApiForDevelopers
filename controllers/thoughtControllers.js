@@ -8,7 +8,7 @@ module.exports ={
         res.send(thoughts);
     },
     async getThoughtbyID(req,res){
-        const Idthought = await Thought.findOne({_id:req.params.thId});
+        const Idthought = await Thought.findOne({_id:req.params.thId}).populate("reactions");
         res.send(Idthought);
         console.log('got by id');
     },
@@ -43,10 +43,10 @@ module.exports ={
     async reactTh(req,res){
         const reactThought = await Thought.findOneAndUpdate(
             {_id:req.params.thId},
-            {$push: {reactions:req.body.reactionId}},
+            {$push: {reactions:req.body}},
             {new:true},
         )
-        res.sent(reactThought);
+        res.send(reactThought);
         console.log('react to thought');
     },
     async delThou(req,res){
@@ -55,9 +55,13 @@ module.exports ={
             {$pull: {reactions:req.body}},
             {new:true},
         )
-        res.sent(delThought);
-        console.log('react to thought');
+        res.send(delThought);
+        console.log('delete to thought');
     },
+    // async ShowReactions(req,res){
+    //     const ShReact = await Thought.find();
+    //     res.send(ShReact.reactions)
+    // },
 
 
 }

@@ -8,6 +8,7 @@ const {
     delThought,
     reactTh,
     delThou,
+    ShowReactions,
 } = require("../../controllers/thoughtControllers");
 
 
@@ -23,7 +24,10 @@ router.route("/:thId")
 // /api/thoughts/:thoughtId/reactions
 router.route("/:thId/reactions")
 .post(reactTh)
-.delete(delThou);
+.delete(delThou)
+
+// router.route("/ShowReactions")
+// .get(ShowReactions);
 
 
 
