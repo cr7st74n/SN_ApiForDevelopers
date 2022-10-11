@@ -37,8 +37,6 @@ Apache 2.0 License
 ## Deployment
 Cristian Gonzalez
 
-## Tests
-
 
 ## Questions
  
@@ -47,9 +45,4 @@ https://github.com/cr7st74n
 
 cris-082011@hotmail.com
 
-## Project Link
-
-
-## Project Deployment
-[Access here!]()
 
